@@ -1,4 +1,5 @@
 <?php
+use Illuminate\Support\Facades\Route;
 
 /*
 |--------------------------------------------------------------------------
@@ -11,6 +12,9 @@
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
+Route::group(array('prefix' => 'chamados'), function()
+{
+    Route::get('/', 'ChamadoController@formulario');
+    Route::get('listar', 'ChamadoController@listar');
+    Route::post('registrar', 'ChamadoController@registrar');
 });
