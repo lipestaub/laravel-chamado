@@ -13,7 +13,7 @@ class CreateChamadoTempTable extends Migration
      */
     public function up()
     {
-        Schema::create('chamado_temp', function (Blueprint $table) {
+        Schema::create('chamado_temps', function (Blueprint $table) {
             $table->increments('id');
             $table->string('nome');
             $table->string('empresa');
@@ -36,6 +36,6 @@ class CreateChamadoTempTable extends Migration
      */
     public function down()
     {
-        Schema::drop('chamado_temp');
+        Schema::drop('chamado_temps');
     }
 }
