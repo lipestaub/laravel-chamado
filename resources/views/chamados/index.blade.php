@@ -17,35 +17,35 @@
             <div>
                 <div>
                     <b>{{ Form::label('nome', 'Nome') }}</b>
-                    {{ Form::text('nome', null, ['class' => 'form-control'])}}
+                    {{ Form::text('nome', null, ['class' => 'form-control', 'required' => ''])}}
                 </div>
                 <div>
                     <b>{{ Form::label('empresa', 'Empresa') }}</b>
                     <div>
-                        {{ Form::text('empresa', null, ['class' => 'form-control'])}}
+                        {{ Form::text('empresa', null, ['class' => 'form-control', 'required' => ''])}}
                     </div>
                 </div>
                 <div>
                     <b>{{ Form::label('email', 'E-mail') }}</b>
                     <div>
-                        {{ Form::text('email', null, ['class' => 'form-control'])}}
+                        {{ Form::text('email', null, ['class' => 'form-control', 'required' => ''])}}
                     </div>
                 </div>
                 <div>
                     <b>{{ Form::label('telefone', 'Telefone') }}</b>
                     <div>
-                        {{ Form::text('telefone', null, ['class' => 'form-control'])}}
+                        {{ Form::text('telefone', null, ['class' => 'form-control', 'required' => ''])}}
                     </div>
                 </div>
             </div>
             <br>
             <div>
-                <b>{{ Form::label('titulo', 'Título') }}</b>
+                <b>{{ Form::label('titulo', 'Solicitação') }}</b>
                 <div>
-                    {{ Form::text('titulo', null, ['class' => 'form-control'])}}
+                    {{ Form::text('titulo', null, ['class' => 'form-control'], 'required' => '')}}
                 </div>
                 <br>
-                <b>{{ Form::label('mensagem', 'Mensagem') }}</b>
+                <b>{{ Form::label('mensagem', 'Descrição') }}</b>
                 <div>
                     {{ Form::text('mensagem', null, ['class' => 'form-control'])}}
                 </div>
