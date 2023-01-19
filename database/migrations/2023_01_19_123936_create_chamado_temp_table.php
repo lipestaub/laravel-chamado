@@ -24,6 +24,7 @@ class CreateChamadoTempTable extends Migration
             $table->string('anexo')->nullable();
             $table->string('chave_acesso');
             $table->integer('datahora');
+            $table->string('ip');
             $table->timestamps();
         });
     }
