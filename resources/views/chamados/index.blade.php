@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Chamado</title>
+    <title>Abrir chamado</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.5.0/css/font-awesome.min.css">
     
     {!!Html::style("bootstrap/css/bootstrap.min.css")!!}
@@ -24,28 +24,59 @@
         {{ Form::open(['url' => 'chamados/registrar', 'method' => 'post', 'enctype' => 'multipart/form-data']) }}
         <div>
             <div>
-                <div>
-                    <b>{{ Form::label('nome', 'Nome') }}</b>
-                    {{ Form::text('nome', null, ['class' => 'form-control', 'required' => ''])}}
-                </div>
-                <div>
-                    <b>{{ Form::label('empresa', 'Empresa') }}</b>
+                @if (empty($dados))
                     <div>
-                        {{ Form::text('empresa', null, ['class' => 'form-control', 'required' => ''])}}
+                        <b>{{ Form::label('nome', 'Nome') }}</b>
+                        {{ Form::text('nome', null, ['class' => 'form-control', 'required' => ''])}}
                     </div>
-                </div>
-                <div>
-                    <b>{{ Form::label('email', 'E-mail') }}</b>
+                    <br>
                     <div>
-                        {{ Form::text('email', null, ['class' => 'form-control', 'required' => ''])}}
+                        <b>{{ Form::label('empresa', 'Empresa') }}</b>
+                        <div>
+                            {{ Form::text('empresa', null, ['class' => 'form-control', 'required' => ''])}}
+                        </div>
                     </div>
-                </div>
-                <div>
-                    <b>{{ Form::label('telefone', 'Telefone') }}</b>
+                    <br>
                     <div>
-                        {{ Form::text('telefone', null, ['class' => 'form-control', 'required' => ''])}}
+                        <b>{{ Form::label('email', 'E-mail') }}</b>
+                        <div>
+                            {{ Form::text('email', null, ['class' => 'form-control', 'required' => ''])}}
+                        </div>
                     </div>
-                </div>
+                    <br>
+                    <div>
+                        <b>{{ Form::label('telefone', 'Telefone') }}</b>
+                        <div>
+                            {{ Form::text('telefone', null, ['class' => 'form-control', 'required' => ''])}}
+                        </div>
+                    </div>
+                @else
+                    <div>
+                        <b>{{ Form::label('nome', 'Nome') }}</b>
+                        {{ Form::text('nome', $dados['nome'], ['class' => 'form-control', 'required' => ''])}}
+                    </div>
+                    <br>
+                    <div>
+                        <b>{{ Form::label('empresa', 'Empresa') }}</b>
+                        <div>
+                            {{ Form::text('empresa', $dados['empresa'], ['class' => 'form-control', 'required' => ''])}}
+                        </div>
+                    </div>
+                    <br>
+                    <div>
+                        <b>{{ Form::label('email', 'E-mail') }}</b>
+                        <div>
+                            {{ Form::text('email', $dados['email'], ['class' => 'form-control', 'required' => ''])}}
+                        </div>
+                    </div>
+                    <br>
+                    <div>
+                        <b>{{ Form::label('telefone', 'Telefone') }}</b>
+                        <div>
+                            {{ Form::text('telefone', $dados['telefone'], ['class' => 'form-control', 'required' => ''])}}
+                        </div>
+                    </div>
+                @endif
             </div>
             <br>
             <div>
@@ -56,20 +87,23 @@
                 <br>
                 <b>{{ Form::label('mensagem', 'Descrição') }}</b>
                 <div>
-                    {{ Form::text('mensagem', null, ['class' => 'form-control'])}}
+                    {{ Form::textarea('mensagem', null, ['class' => 'form-control'])}}
                 </div>
             </div>
+            <br>
             <div>
                 <b>{{ Form::label('anexo', 'Anexo') }}</b>
                 <div>
                     {{ Form::file('anexo') }}
                 </div>
             </div>
+            <br>
             <div>
                 <!-- recaptcha -->
             </div>
+            <br>
             <div>
-                <button type="submit" class="btn btn-primary">Enviar</button>
+                <button type="submit" class="btn btn-primary"><i class="fa fa-paper-plane"></i> Enviar</button>
             </div>
     {{ Form::close() }}
 </body>
