@@ -11,9 +11,18 @@
     {!!Html::script("bootstrap/js/bootstrap.bundle.min.js")!!}
 </head>
 <body>
-    <div>
-        {{ Form::model(['url' => '/enviar', 'method' => 'post', 'enctype' => 'multipart/form-data']) }}
-        <div class="container">
+    @if (Session::has('warning'))
+        <div class="card text-bg-primary mb-3">
+            <div class="card-header">Aviso</div>
+            <div class="card-body">
+                <span class="card-text">{{ Session::get('warning') }}</span>
+            </div>
+        </div>
+        <br>
+    @endif
+    <div class="container">
+        {{ Form::open(['url' => 'chamados/registrar', 'method' => 'post', 'enctype' => 'multipart/form-data']) }}
+        <div>
             <div>
                 <div>
                     <b>{{ Form::label('nome', 'Nome') }}</b>
@@ -42,7 +51,7 @@
             <div>
                 <b>{{ Form::label('titulo', 'Solicitação') }}</b>
                 <div>
-                    {{ Form::text('titulo', null, ['class' => 'form-control'], 'required' => '')}}
+                    {{ Form::text('titulo', null, ['class' => 'form-control', 'required' => ''])}}
                 </div>
                 <br>
                 <b>{{ Form::label('mensagem', 'Descrição') }}</b>
