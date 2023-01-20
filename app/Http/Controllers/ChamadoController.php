@@ -81,25 +81,6 @@ class ChamadoController extends Controller
         return redirect('chamados/');
     }
 
-    public function deletar($id) {
-        $pastaChamado = public_path() . '/anexos_chamados/chamado' . $id;
-
-        if (is_dir($pastaChamado)) {
-            $anexosChamado = scandir($pastaChamado);
-
-            foreach ($anexosChamado as $anexo) {
-                if ($anexo != '.' && $anexo != '..') {
-                    unlink($pastaChamado . '/' . $anexo);
-                }
-            }
-    
-            rmdir($pastaChamado);
-        }
-        ChamadoTemp::whereId($id)->delete();
-
-        return redirect('chamados/listar');
-    }
-
     private function getChaveAcesso() {
         $chaveAcesso = sha1((string) time() . (string) rand(10000, 99999) . (string) rand(1000, 9999));
 
