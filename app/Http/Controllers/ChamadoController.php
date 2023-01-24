@@ -20,6 +20,10 @@ class ChamadoController extends Controller
     public function listar() {
         $chamados = ChamadoTemp::orderBy('datahora', 'desc')->get();
 
+        foreach ($chamados as $chamado) {
+            $chamado->datahora -= 10800;
+        }
+
         $view = ['chamados' => $chamados];
 
         return view('chamados.listar', $view);
