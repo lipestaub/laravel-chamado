@@ -99,7 +99,9 @@
             </div>
             <br>
             <div>
-                <!-- recaptcha -->
+                <script src="https://www.google.com/recaptcha/enterprise.js?render=6LcM0BAkAAAAAJxYLVqg0_jBjIU9-Z6TYoONp7WT"></script>
+                <script>
+                    grecaptcha.enterprise.ready(function() { grecaptcha.enterprise.execute('6LcM0BAkAAAAAJxYLVqg0_jBjIU9-Z6TYoONp7WT', {action: 'login'}).then(function(token) {...}); });</script>
             </div>
             <br>
             <div>

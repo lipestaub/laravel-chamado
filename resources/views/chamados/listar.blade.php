@@ -50,6 +50,13 @@
                             <b>Descri&ccedil;&atilde;o: </b>{{ $chamado->mensagem }}
                         </div>
                     </div>
+                    @if ($chamado->anexo)
+                    <div class="row col-sm-12 m-3">
+                        <div class="col-sm-12">
+                            <b>Anexo: </b><a href="{{ asset($chamado->anexo) }}">Abrir</a>
+                        </div>
+                    </div>
+                    @endif
                 </div>
             </div>
         @endforeach
