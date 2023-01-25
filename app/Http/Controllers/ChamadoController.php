@@ -35,6 +35,7 @@ class ChamadoController extends Controller
 
         if (isset($form['g-recaptcha-response'])) {
             $this->validarRecaptcha($form['g-recaptcha-response']);
+            unset($form['g-recaptcha-response']);
         }
 
         $uploadedFile = isset($form['anexo']) ? $form['anexo'] : null;
@@ -98,7 +99,7 @@ class ChamadoController extends Controller
 
     private function validarRecaptcha($token){
         $post_data = http_build_query([
-          'secret' => "SECRET",
+          'secret' => env('SECRET'),
           'response' => $token
         ]);
     

@@ -9,73 +9,71 @@
     
     {!!Html::style("bootstrap/css/bootstrap.min.css")!!}
     {!!Html::script("bootstrap/js/bootstrap.bundle.min.js")!!}
+    {!!Html::script("main.js")!!}
 </head>
 <body>
-    @if (Session::has('warning'))
-        <div class="card text-bg-primary mb-3">
-            <div class="card-header">Aviso</div>
-            <div class="card-body">
-                <span class="card-text">{{ Session::get('warning') }}</span>
-            </div>
-        </div>
-        <br>
-    @endif
     <div class="container">
-        {{ Form::open(['url' => 'chamados/registrar', 'method' => 'post', 'enctype' => 'multipart/form-data']) }}
+        @if (Session::has('warning'))
+            <div class="alert alert-warning mt-3">
+                <strong>Aviso: </strong> {{ Session::get('warning') }}
+            </div>
+        @endif
+
+        {{ Form::open(['url' => 'chamados/registrar', 'method' => 'post', 'enctype' => 'multipart/form-data', 'id' => 'chamado']) }}
         <div>
             <div>
                 @if (empty($dados))
+                <div>
+                    <b>{{ Form::label('nome', 'Nome') }}</b>
+                    {{ Form::text('nome', null, ['class' => 'form-control', 'required' => ''])}}
+                </div>
+                <br>
+                <div>
+                    <b>{{ Form::label('empresa', 'Empresa') }}</b>
                     <div>
-                        <b>{{ Form::label('nome', 'Nome') }}</b>
-                        {{ Form::text('nome', null, ['class' => 'form-control', 'required' => ''])}}
+                        {{ Form::text('empresa', null, ['class' => 'form-control', 'required' => ''])}}
                     </div>
-                    <br>
+                </div>
+                <br>
+                <div>
+                    <b>{{ Form::label('email', 'E-mail') }}</b>
                     <div>
-                        <b>{{ Form::label('empresa', 'Empresa') }}</b>
-                        <div>
-                            {{ Form::text('empresa', null, ['class' => 'form-control', 'required' => ''])}}
-                        </div>
+                        {{ Form::text('email', null, ['class' => 'form-control', 'required' => ''])}}
                     </div>
-                    <br>
+                </div>
+                <br>
+                <div>
+                    <b>{{ Form::label('telefone', 'Telefone') }}</b>
                     <div>
-                        <b>{{ Form::label('email', 'E-mail') }}</b>
-                        <div>
-                            {{ Form::text('email', null, ['class' => 'form-control', 'required' => ''])}}
-                        </div>
+                        {{ Form::text('telefone', null, ['class' => 'form-control', 'required' => ''])}}
                     </div>
-                    <br>
-                    <div>
-                        <b>{{ Form::label('telefone', 'Telefone') }}</b>
-                        <div>
-                            {{ Form::text('telefone', null, ['class' => 'form-control', 'required' => ''])}}
-                        </div>
-                    </div>
+                </div>
                 @else
+                <div>
+                    <b>{{ Form::label('nome', 'Nome') }}</b>
+                    {{ Form::text('nome', $dados['nome'], ['class' => 'form-control', 'required' => ''])}}
+                </div>
+                <br>
+                <div>
+                    <b>{{ Form::label('empresa', 'Empresa') }}</b>
                     <div>
-                        <b>{{ Form::label('nome', 'Nome') }}</b>
-                        {{ Form::text('nome', $dados['nome'], ['class' => 'form-control', 'required' => ''])}}
+                        {{ Form::text('empresa', $dados['empresa'], ['class' => 'form-control', 'required' => ''])}}
                     </div>
-                    <br>
+                </div>
+                <br>
+                <div>
+                    <b>{{ Form::label('email', 'E-mail') }}</b>
                     <div>
-                        <b>{{ Form::label('empresa', 'Empresa') }}</b>
-                        <div>
-                            {{ Form::text('empresa', $dados['empresa'], ['class' => 'form-control', 'required' => ''])}}
-                        </div>
+                        {{ Form::text('email', $dados['email'], ['class' => 'form-control', 'required' => ''])}}
                     </div>
-                    <br>
+                </div>
+                <br>
+                <div>
+                    <b>{{ Form::label('telefone', 'Telefone') }}</b>
                     <div>
-                        <b>{{ Form::label('email', 'E-mail') }}</b>
-                        <div>
-                            {{ Form::text('email', $dados['email'], ['class' => 'form-control', 'required' => ''])}}
-                        </div>
+                        {{ Form::text('telefone', $dados['telefone'], ['class' => 'form-control', 'required' => ''])}}
                     </div>
-                    <br>
-                    <div>
-                        <b>{{ Form::label('telefone', 'Telefone') }}</b>
-                        <div>
-                            {{ Form::text('telefone', $dados['telefone'], ['class' => 'form-control', 'required' => ''])}}
-                        </div>
-                    </div>
+                </div>
                 @endif
             </div>
             <br>
@@ -99,14 +97,12 @@
             </div>
             <br>
             <div>
-                <script src="https://www.google.com/recaptcha/enterprise.js?render=6LcM0BAkAAAAAJxYLVqg0_jBjIU9-Z6TYoONp7WT"></script>
-                <script>
-                    grecaptcha.enterprise.ready(function() { grecaptcha.enterprise.execute('6LcM0BAkAAAAAJxYLVqg0_jBjIU9-Z6TYoONp7WT', {action: 'login'}).then(function(token) {...}); });</script>
+                <script src="https://www.google.com/recaptcha/api.js?onload=onloadCallback&render=explicit" async defer></script>
             </div>
             <br>
             <div>
-                <button type="submit" class="btn btn-primary"><i class="fa fa-paper-plane"></i> Enviar</button>
+                <button id="enviar" type="submit" class="btn btn-primary"><i class="fa fa-paper-plane"></i> Enviar</button>
             </div>
-    {{ Form::close() }}
-</body>
-</html>
+            {{ Form::close() }}
+        </body>
+        </html>
