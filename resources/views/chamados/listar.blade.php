@@ -7,13 +7,14 @@
     <title>Chamados</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.5.0/css/font-awesome.min.css">
     
+    {!!Html::style("style.css")!!}
     {!!Html::style("bootstrap/css/bootstrap.min.css")!!}
     {!!Html::script("bootstrap/js/bootstrap.bundle.min.js")!!}
 </head>
 <body>
     <div class="container"> 
         @foreach ($chamados as $chamado)
-            <div class="border border-dark m-3 p-1">
+            <div class="border border-dark rounded m-3 p-1">
                 <div class="text-center m-2">
                     <h4>Chamado {{ $chamado->id }}</h4>
                 </div>
@@ -46,7 +47,7 @@
                         </div>
                     </div>
                     <div class="row col-sm-12 m-3">
-                        <div class="col-sm-12">
+                        <div class="col-sm-12 break-word">
                             <b>Descri&ccedil;&atilde;o: </b>{{ $chamado->mensagem }}
                         </div>
                     </div>
