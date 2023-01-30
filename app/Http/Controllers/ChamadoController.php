@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\ChamadoTemp;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Mail;
 use App\Http\Requests;
 
 class ChamadoController extends Controller
@@ -71,6 +72,15 @@ class ChamadoController extends Controller
         catch(\Exception $e) {
             return redirect('chamados')->withInput($request->all());
         }
+
+        Mail::send('emails.chamadoAberto', ['data' => $form], function ($message) use ($form) {
+            $message->from(env('MAIL_USERNAME'), 'Felipe Staub');
+            $message->sender(env('MAIL_USERNAME'), 'Felipe Staub');
+            $message->to($form['email'], $form['nome']);
+            $message->replyTo(env('MAIL_USERNAME'), 'Felipe Staub');
+            $message->subject('Chamado aberto');
+            $message->priority(3);
+        });
 
         $dados = json_encode([
             'nome' => $form['nome'],
