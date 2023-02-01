@@ -73,14 +73,45 @@ class ChamadoController extends Controller
             return redirect('chamados')->withInput($request->all());
         }
 
-        Mail::send('emails.chamadoAberto', ['data' => $form], function ($message) use ($form) {
-            $message->from(env('MAIL_USERNAME'), 'Felipe Staub');
-            $message->sender(env('MAIL_USERNAME'), 'Felipe Staub');
-            $message->to($form['email'], $form['nome']);
-            $message->replyTo(env('MAIL_USERNAME'), 'Felipe Staub');
-            $message->subject('Chamado aberto');
-            $message->priority(3);
-        });
+        $json = json_encode([
+            'api_user' => 'jstaub@sulvale.inf.br',
+            'api_key' => 'ea6f04d342003d1db558eec8e145f5f3661d64e01164bc28a97991b',
+            'to' => [[
+                'email' => 'lipestaub@gmail.com',
+                'name' => 'Felipe',
+            ]],
+            'from' => [
+                'name' => 'Sulvale',
+                'email' => 'jstaub@sulvale.inf.br',
+                'reply_to' => 'jstaub@sulvale.inf.br',
+            ],
+            'subject' => 'Chamado aberto',
+            'html' => '<span>chegou</span>',
+            'text' => 'chegou',
+            'addheaders' => [
+                'x-priority' => '1',
+            ]
+        ]);
+
+        $curl = curl_init();
+
+        curl_setopt($curl, CURLOPT_URL,"https://api.iagentesmtp.com.br/api/v3/send/");
+        curl_setopt($curl, CURLOPT_POST, 1);
+        curl_setopt($curl, CURLOPT_POSTFIELDS, $json);
+        curl_setopt($curl, CURLOPT_RETURNTRANSFER, true);
+
+        // curl_setopt_array($curl, [
+        //     CURLOPT_URL => 'https://api.iagentesmtp.com.br/api/v3/send/',
+        //     CURLOPT_POST => true,
+        //     CURLOPT_RETURNTRANSFER => true,
+        //     CURLOPT_POSTFIELDS => $json,
+        // ]);
+
+        $result = curl_exec($curl);
+
+        dd($result);
+
+        curl_close($curl);
 
         $dados = json_encode([
             'nome' => $form['nome'],
